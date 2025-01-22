@@ -1,4 +1,4 @@
-﻿//using System.Reflection.Emit;
+﻿
 
 namespace _2048WinFormsApp;
 public partial class GameForm : Form
@@ -9,27 +9,30 @@ public partial class GameForm : Form
     private const int start_y = 80;
     private Label[,] labelsMap;
 
-    public Users user;    
-    public int mapSize;    
-    public int bestScore;       
+    public Users user;
+    public int mapSize;
+    public int bestScore;
     public int score = 0;
-    
+
     public GameForm()
     {
-        InitializeComponent();        
-        this.StartPosition = FormStartPosition.CenterScreen;
-    }    
+        InitializeComponent();
+        StartPosition = FormStartPosition.CenterScreen;
+    }
+
     private void GameForm_Load(object sender, EventArgs e)
-    {  
+    {
         InitMap();
         GenerateNumber();
         ShowScore();
-        CalculateBestScore();        
+        CalculateBestScore();
     }
+
     public void CalculateMapSize(int size)
     {
-        mapSize = size;         
+        mapSize = size;
     }
+
     private void CalculateBestScore()
     {
         var users = UserStorage.GetUserResults();
@@ -40,27 +43,30 @@ public partial class GameForm : Form
         bestScore = users[0].Score;
         foreach (var user in users)
         {
-            if(user.Score > bestScore)
+            if (user.Score > bestScore)
             {
                 bestScore = user.Score;
             }
         }
         ShowBestScore();
     }
+
     private void ShowBestScore()
     {
         if (score > bestScore)
         {
             bestScore = score;
         }
-       bestScoreLabel.Text = bestScore.ToString();
+        bestScoreLabel.Text = bestScore.ToString();
     }
+
     private void ShowScore()
     {
         scoreLabel.Text = score.ToString();
     }
+
     private void InitMap()
-    {        
+    {
         ClientSize = new Size(start_x + (labelSize + padding) * mapSize, start_y + (labelSize + padding) * mapSize);
         labelsMap = new Label[mapSize, mapSize];
         for (int i = 0; i < mapSize; i++)
@@ -72,7 +78,8 @@ public partial class GameForm : Form
                 labelsMap[i, j] = newLabel;
             }
         }
-    }    
+    }
+
     private void GenerateNumber()
     {
         var random = new Random();
@@ -90,7 +97,8 @@ public partial class GameForm : Form
                 break;
             }
         }
-    }    
+    }
+
     private string GenerateValue()
     {
         var random = new Random();
@@ -126,7 +134,7 @@ public partial class GameForm : Form
         switch (label.Text)
         {
             case "": label.BackColor = SystemColors.ButtonShadow; break;
-            case "2": label.BackColor = Color.FromArgb(238,228,218); break;
+            case "2": label.BackColor = Color.FromArgb(238, 228, 218); break;
             case "4": label.BackColor = Color.FromArgb(231, 224, 200); break;
             case "8": label.BackColor = Color.FromArgb(242, 177, 121); break;
             case "16": label.BackColor = Color.FromArgb(245, 149, 99); break;
@@ -170,7 +178,7 @@ public partial class GameForm : Form
         GenerateNumber();
         ShowScore();
         ShowBestScore();
-        
+
         if (Win())
         {
             user.Score = score;
@@ -191,9 +199,10 @@ public partial class GameForm : Form
 
             ChoiceForm choiceForm = new ChoiceForm();
             choiceForm.ShowDialog();
-            this.Close();
+            Close();
         }
     }
+
     private void MoveDown()
     {
         for (int j = 0; j < mapSize; j++)
@@ -211,7 +220,7 @@ public partial class GameForm : Form
                                 var number = int.Parse(labelsMap[i, j].Text);
                                 score += number * 2;
                                 labelsMap[i, j].Text = (number * 2).ToString();
-                                labelsMap[k, j].Text = string.Empty;                               
+                                labelsMap[k, j].Text = string.Empty;
                             }
                             break;
                         }
@@ -219,6 +228,7 @@ public partial class GameForm : Form
                 }
             }
         }
+
         for (int j = 0; j < mapSize; j++)
         {
             for (int i = mapSize - 1; i >= 0; i--)
@@ -239,6 +249,7 @@ public partial class GameForm : Form
             }
         }
     }
+
     private void MoveUp()
     {
         for (int j = 0; j < mapSize; j++)
@@ -256,7 +267,7 @@ public partial class GameForm : Form
                                 var number = int.Parse(labelsMap[i, j].Text);
                                 score += number * 2;
                                 labelsMap[i, j].Text = (number * 2).ToString();
-                                labelsMap[k, j].Text = string.Empty;                                
+                                labelsMap[k, j].Text = string.Empty;
                             }
                             break;
                         }
@@ -264,6 +275,7 @@ public partial class GameForm : Form
                 }
             }
         }
+
         for (int j = 0; j < mapSize; j++)
         {
             for (int i = 0; i < mapSize; i++)
@@ -283,6 +295,7 @@ public partial class GameForm : Form
             }
         }
     }
+
     private void MoveLeft()
     {
         for (int i = 0; i < mapSize; i++)
@@ -300,7 +313,7 @@ public partial class GameForm : Form
                                 var number = int.Parse(labelsMap[i, j].Text);
                                 score += number * 2;
                                 labelsMap[i, j].Text = (number * 2).ToString();
-                                labelsMap[i, k].Text = string.Empty;                                
+                                labelsMap[i, k].Text = string.Empty;
                             }
                             break;
                         }
@@ -308,6 +321,7 @@ public partial class GameForm : Form
                 }
             }
         }
+
         for (int i = 0; i < mapSize; i++)
         {
             for (int j = 0; j < mapSize; j++)
@@ -321,12 +335,13 @@ public partial class GameForm : Form
                             labelsMap[i, j].Text = labelsMap[i, k].Text;
                             labelsMap[i, k].Text = string.Empty;
                             break;
-                        }                        
+                        }
                     }
                 }
             }
         }
     }
+
     private void MoveRight()
     {
         for (int i = 0; i < mapSize; i++)
@@ -344,7 +359,7 @@ public partial class GameForm : Form
                                 var number = int.Parse(labelsMap[i, j].Text);
                                 score += number * 2;
                                 labelsMap[i, j].Text = (number * 2).ToString();
-                                labelsMap[i, k].Text = string.Empty;                                
+                                labelsMap[i, k].Text = string.Empty;
                             }
                             break;
                         }
@@ -352,6 +367,7 @@ public partial class GameForm : Form
                 }
             }
         }
+
         for (int i = 0; i < mapSize; i++)
         {
             for (int j = mapSize - 1; j >= 0; j--)
@@ -371,13 +387,14 @@ public partial class GameForm : Form
             }
         }
     }
+
     private bool Win()
     {
-        for (int i = 0 ; i < mapSize; i++)
+        for (int i = 0; i < mapSize; i++)
         {
-            for(int j = 0 ; j < mapSize ; j++)
+            for (int j = 0; j < mapSize; j++)
             {
-                if (labelsMap[i,j].Text == "2048")
+                if (labelsMap[i, j].Text == "2048")
                 {
                     return true;
                 }
@@ -397,6 +414,7 @@ public partial class GameForm : Form
                 }
             }
         }
+
         for (int i = 0; i < mapSize - 1; i++)
         {
             for (int j = 0; j < mapSize - 1; j++)
@@ -406,7 +424,7 @@ public partial class GameForm : Form
                     return false;
                 }
             }
-        }        
+        }
         return true;
     }
 }
