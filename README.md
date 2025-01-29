@@ -95,9 +95,11 @@
         }
     }
 
-<h2>Немного видео из игры</h2>
-<a href="https://github.com/user-attachments/assets/85b26c21-0643-4920-b8b1-f987ef2cbf22">Смотреть</a>
-https://github.com/user-attachments/assets/85b26c21-0643-4920-b8b1-f987ef2cbf22
+<h2>Немного видео из игры</h2>  
+
+https://github.com/user-attachments/assets/67c5d280-103d-4270-9dc5-18be1edc05bd
+
+
 <div class="text" align="center">
     <h1>Спасибо за внимание!</h2>
 </div>
