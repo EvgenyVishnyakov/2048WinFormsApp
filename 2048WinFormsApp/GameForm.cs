@@ -1,18 +1,18 @@
-﻿
+﻿namespace _2048WinFormsApp;
 
-namespace _2048WinFormsApp;
 public partial class GameForm : Form
 {
+    public int mapSize { get; set; }
+    public int bestScore;
+    public int score = 0;
+    public Users user { get; set; }
+
+    private int numbers { get; set; }
     private const int labelSize = 80;
     private const int padding = 6;
     private const int start_x = 10;
     private const int start_y = 80;
     private Label[,] labelsMap;
-
-    public Users user;
-    public int mapSize;
-    public int bestScore;
-    public int score = 0;
 
     public GameForm()
     {
@@ -102,7 +102,6 @@ public partial class GameForm : Form
     private string GenerateValue()
     {
         var random = new Random();
-        int numbers;
         var randomNumbers = random.Next(4);
         if (randomNumbers == 0)
         {
@@ -114,6 +113,7 @@ public partial class GameForm : Form
         }
         return Convert.ToString(numbers);
     }
+
     private Label CreateLabel(int indexRow, int indexColumn)
     {
         var label = new Label();
