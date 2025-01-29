@@ -96,7 +96,7 @@
     }
 
 <h2>Немного видео из игры</h2>
-<a href="https://github.com/user-attachments/assets/85b26c21-0643-4920-b8b1-f987ef2cbf22"></a>
+<a href="https://github.com/user-attachments/assets/85b26c21-0643-4920-b8b1-f987ef2cbf22">Смотреть</a>
 
 <div class="text" align="center">
     <h1>Спасибо за внимание!</h2>
